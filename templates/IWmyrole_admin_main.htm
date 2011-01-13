@@ -1,15 +1,15 @@
 {admincategorymenu}
-<div class="pn-adminbox">
+<div class="z-adminbox">
 	<h1>{gt text="myRole"}</h1>
 </div>
-<div class="pn-admincontainer">
-	<div class="pn-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large'}</div>
+<div class="z-admincontainer">
+	<div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large'}</div>
 	<div style="height:10px;">&nbsp;</div>
 	<h2>{gt text="Group selection"}</h2>
 	<div style="height:15px;">&nbsp;</div>
-	<form class="pn-adminform" enctype="application/x-www-form-urlencoded" method="post" name="changeGroup" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
+	<form class="z-adminform" enctype="application/x-www-form-urlencoded" method="post" name="changeGroup" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
 		<input type="hidden" name="authid" value="{secgenauthkey module="IWmyrole"}" />
-		<div class="pn-adminformrow">
+		<div class="z-adminformrow">
 			<label for="gid">{gt text="Choose the change role group"}:</label>
 			<select name="gid">
 				{foreach item=group from=$groups}
