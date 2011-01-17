@@ -57,7 +57,7 @@ class IWmyrole_Installer extends Zikula_Installer {
 
         // The return value of the function is checked here
         if ($gid != false) {
-            ModUtil::setVar('IWmyrole', 'rolegroup', $gid);
+            $this->setVar('rolegroup', $gid);
             // Gets the first sequence number of permissions list
             $pos = DBUtil::selectFieldMax('group_perms', 'sequence', 'MIN');
             // SET MODULE AND BLOCK PERMISSIONS
@@ -71,7 +71,7 @@ class IWmyrole_Installer extends Zikula_Installer {
                                     'insseq' => $pos + 1));
         }
 
-        ModUtil::setVar('IWmyrole', 'groupsNotChangeable', '');
+        $this->setVar('groupsNotChangeable', '');
 
         //Initialation successfull
         return true;
@@ -92,8 +92,8 @@ class IWmyrole_Installer extends Zikula_Installer {
         $where = "WHERE $column[component] LIKE 'IWmyrole%' AND $column[gid] = " . ModUtil::getVar('IWmyrole', 'rolegroup');
         $result = DBUtil::DeleteWhere('group_perms', $where);
 
-        ModUtil::delVar('my_role', 'rolegroup');
-        ModUtil::delVar('IWmyrole', 'groupsNotChangeable');
+        $this->delVar('rolegroup')
+             ->delVar('groupsNotChangeable');
 
         return true;
     }

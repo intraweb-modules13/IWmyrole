@@ -3,10 +3,10 @@
            <div style="margin-bottom:15px;">
             <strong>{gt text="Choose the groups..." domain="module_IWmyrole"}</strong><br><br>
             {foreach item=group from=$groups name=rols}
-            <div>
-                <input type="checkbox" name="roles[]" {if $roleGroups[$group.id]}checked{/if} value="{$group.id}" />
-                {$group.name}
-            </div>
+                <div>
+                    <input type="checkbox" name="roles[]" {if isset($roleGroups[$group.id])}checked{/if} value="{$group.id}" />
+                    {$group.name}
+                </div>
             {/foreach}
             <div>
                 &nbsp;
@@ -15,7 +15,7 @@
                 <input type="checkbox" name="setDefault" value="1" /> {gt text="Set as default" domain="module_IWmyrole"}
             </div>
         </div>
-        {if $invalidChange eq 1}
+        {if isset($invalidChange) && $invalidChange eq 1}
         <div style="color: red;">
             {gt text="No change has been made due to possible lost of previous roles. Review the permissions related with the change roles group. Be sure that this permission is in second place in the permissions list." domain="module_IWmyrole"}
         </div>
