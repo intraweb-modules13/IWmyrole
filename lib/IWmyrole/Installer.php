@@ -78,7 +78,7 @@ class IWmyrole_Installer extends Zikula_Installer {
     }
 
     /**
-     * Delete the iw_noteboard module
+     * Delete the iwmyrole module
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
      * @author Josep Ferràndiz Farré (jferran6@xtec.cat)
      * @return bool true if successful, false otherwise
@@ -99,7 +99,7 @@ class IWmyrole_Installer extends Zikula_Installer {
     }
 
     /**
-     * Update the iw_noteboard module
+     * Update the iwmyrole module
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
      * @return bool true if successful, false otherwise
      */
