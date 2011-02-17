@@ -27,7 +27,7 @@ class IWmyrole_Installer extends Zikula_Installer {
         }
 
         // Check if the version needed is correct
-        $versionNeeded = '2.0';
+        $versionNeeded = '3.0.0';
         if (!ModUtil::func('IWmain', 'admin', 'checkVersion',
                             array('version' => $versionNeeded))) {
             return false;
