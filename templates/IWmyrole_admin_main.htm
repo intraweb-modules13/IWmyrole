@@ -3,13 +3,13 @@
     <h1>{gt text="myRole"}</h1>
 </div>
 <div class="z-admincontainer">
-    <div class="z-adminpageicon">{img modname='core' src='windowlist.gif' set='icons/large'}</div>
+    <div class="z-adminpageicon">{img modname='core' src='windowlist.png' set='icons/large'}</div>
     <div style="height:10px;">&nbsp;</div>
     <h2>{gt text="Group selection"}</h2>
     <div style="height:15px;">&nbsp;</div>
-    <form class="z-adminform" enctype="application/x-www-form-urlencoded" method="post" name="changeGroup" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
+    <form class="z-form" enctype="application/x-www-form-urlencoded" method="post" name="changeGroup" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWmyrole"}" />
-        <div class="z-adminformrow">
+        <div class="z-formrow">
             <label for="gid">{gt text="Choose the change role group"}:</label>
             <select name="gid">
                 {foreach item=group from=$groups}
@@ -17,22 +17,18 @@
                 {/foreach}
             </select>
         </div>
-        <div style="float: left;">
+        <div class="z-formrow">
             <label for="groupsNotChangeable">{gt text="Groups not listed in the chooseable groups list"}:</label>
+            <div class="z-formnote">
+                {foreach item=group from=$groupsArray}
+                <div><input type="checkbox" name="groups[{$group.id}]" value="{$group.id}" {if $group.checked}checked{/if} />{$group.name}</div>
+                {/foreach}
+            </div>
         </div>
-        <div style="float: left;">
-            {foreach item=group from=$groupsArray}
-            <input type="checkbox" name="groups[{$group.id}]" value="{$group.id}" {if $group.checked}checked{/if} />{$group.name} <br />
-            {/foreach}
-        </div>
-        <div style="clear:both;"></div>
-        <div style="text-align:center;">
-            {button src='button_ok.gif' set='icons/small' __alt="Modify" __title="Modify"} {gt text="Modify"}
-            <a href="{modurl modname=IWwebbox type=admin func=main}">
-                {img modname='core' src='button_cancel.gif' set='icons/small'   __alt="Cancel" __title="Cancel"}
-            </a>
+        <div class="z-center">
+            <div class="z-button">
+                {button src='button_ok.png' set='icons/small' __alt="Modify" __title="Modify"} {gt text="Modify"}
+            </div>
         </div>
     </form>
-    <br>
-    <a href={modurl modname="IWmyrole" type="admin" func="module"}>{gt text="About this module "}</a>
 </div>

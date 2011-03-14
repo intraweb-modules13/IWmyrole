@@ -1,5 +1,5 @@
 <?php
-class IWmyrole_Block_Myrole extends Zikula_Block {
+class IWmyrole_Block_Myrole extends Zikula_Controller_Block {
 
     /**
      * initialise block
@@ -18,7 +18,7 @@ class IWmyrole_Block_Myrole extends Zikula_Block {
      */
     function info() {
         //Values
-        return array('text_type' => 'myrole',
+        return array('text_type' => 'IWmyrole',
                      'module' => 'IWmyrole',
                      'text_type_long' => $this->__('Show the groups or roles available and allow users change the group'),
                      'allow_multiple' => true,

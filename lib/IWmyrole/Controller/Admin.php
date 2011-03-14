@@ -47,29 +47,6 @@ class IWmyrole_Controller_Admin extends Zikula_Controller {
     }
 
     /**
-     * Show module information
-     * @author: 	Josep Ferràndiz (jferran6@xtec.cat)
-     * @author:     Albert Pérez Monfort (aperezm@xtec.cat)
-     * @param:	none
-     * @return:	Module information
-     */
-    // Module information
-    public function module() {
-        // Security check
-        if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
-        }
-
-        $module = ModUtil::func('IWmain', 'user', 'module_info',
-                                 array('module_name' => 'IWmyrole',
-                                       'type' => 'admin'));
-
-        $view = Zikula_View::getInstance('IWmyrole', false);
-        $view->assign('module', $module);
-        return $view->fetch('IWmyrole_admin_module.htm');
-    }
-
-    /**
      * Change the group that can change roles
      * @author: 	Josep Ferràndiz (jferran6@xtec.cat)
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)

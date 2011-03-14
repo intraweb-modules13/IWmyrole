@@ -27,16 +27,13 @@
         </div>
         {/if}
         <div style="float: left;">
-            {gt text="Reset" domain="module_IWmyrole"}&nbsp;&nbsp;<a href="{modurl modname="IWmyrole" type=admin func="resetRoles"}">{img modname='core' src='reload_page.gif' set='icons/small'   __alt="Reset" __title="Reset" style="cursor:pointer;"}</a>
+            {gt text="Reset" domain="module_IWmyrole"}<a href="{modurl modname="IWmyrole" type=admin func="resetRoles"}"> {img modname='core' src='quick_restart.png' set='icons/small'   __alt="Reset" __title="Reset" style="cursor:pointer;"}</a>
         </div>
-        <div style="float: left;">
-            {gt text="Apply new roles" domain="module_IWmyrole"}&nbsp;&nbsp;{img modname='core' src='agt_update_recommended.gif' set='icons/small'   __alt="Apply new roles" __title="Apply new roles" onClick = "javascript:document.change.submit()" style="cursor:pointer;"}
+        <div style="float: right;">
+            {gt text="Apply new roles" domain="module_IWmyrole"} {img modname='core' src='agt_update_recommended.png' set='icons/small'   __alt="Apply new roles" __title="Apply new roles" onClick = "javascript:document.change.submit()" style="cursor:pointer;"}
         </div>
         <div style="clear: both;">
-            &nbsp;
-        </div>
-        <div>
-            {gt text="Administration" domain="module_IWmyrole"}&nbsp;&nbsp;<a href="{modurl modname=IWmyrole type=admin func=main}">{img modname='core' src='package_settings.gif' set='icons/extrasmall'   __alt="Administration" __title="Administration"}</a>
+            {gt text="Administration" domain="module_IWmyrole"} <a href="{modurl modname=IWmyrole type=admin func=main}"> {img modname='core' src='configure.png' set='icons/extrasmall'   __alt="Administration" __title="Administration"}</a>
         </div>
     </form>
 </div>

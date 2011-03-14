@@ -10,7 +10,7 @@ class IWmyrole_Version extends Zikula_Version
 {
     public function getMetaData() {
         $meta = array();
-        $meta['displayname'] = $this->__("myRole");
+        $meta['displayname'] = $this->__("IWmyrole");
         $meta['description'] = $this->__("Allow users to change their roles or groups.");
         $meta['url'] = $this->__("IWmyrole");
         $meta['version'] = '3.0.0';
