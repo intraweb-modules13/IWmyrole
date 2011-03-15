@@ -7,7 +7,7 @@
     <div style="height:10px;">&nbsp;</div>
     <h2>{gt text="Group selection"}</h2>
     <div style="height:15px;">&nbsp;</div>
-    <form class="z-form" enctype="application/x-www-form-urlencoded" method="post" name="changeGroup" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
+    <form id="changeGroup" class="z-form" enctype="application/x-www-form-urlencoded" method="post" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
         <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWmyrole"}" />
         <div class="z-formrow">
             <label for="gid">{gt text="Choose the change role group"}:</label>
@@ -27,7 +27,7 @@
         </div>
         <div class="z-center">
             <div class="z-button">
-                {button src='button_ok.png' set='icons/small' __alt="Modify" __title="Modify"} {gt text="Modify"}
+                <a onClick="javascript:forms['changeGroup'].submit();">{img modname='core' src='button_ok.png' set='icons/small' __alt="Modify" __title="Modify"} {gt text="Modify"}</a>
             </div>
         </div>
     </form>
