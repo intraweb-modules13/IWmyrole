@@ -1,5 +1,5 @@
 <?php
-class IWmyrole_Block_Myrole extends Zikula_Controller_Block {
+class IWmyrole_Block_Myrole extends Zikula_Controller_AbstractBlock {
 
     /**
      * initialise block

@@ -10,7 +10,7 @@
  * @package PostNuke_Value_Addons
  * @subpackage Noteboard
  */
-class IWmyrole_Installer extends Zikula_Installer {
+class IWmyrole_Installer extends Zikula_AbstractInstaller {
     /**
      * Initialise the IWmyrole module creating module vars
      * @author Albert Pérez Monfort (aperezm@xtec.cat)

@@ -6,7 +6,7 @@
  * @return		The version information
  */
 
-class IWmyrole_Version extends Zikula_Version
+class IWmyrole_Version extends Zikula_AbstractVersion
 {
     public function getMetaData() {
         $meta = array();

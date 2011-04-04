@@ -1,5 +1,5 @@
 <?php
-class IWmyrole_Api_Admin extends Zikula_Api {
+class IWmyrole_Api_Admin extends Zikula_AbstractApi {
     /**
      * Delete all the group membership of the user
      * @author:     Albert Pérez Monfort (aperezm@xtec.cat)

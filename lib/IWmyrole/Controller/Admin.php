@@ -1,5 +1,5 @@
 <?php
-class IWmyrole_Controller_Admin extends Zikula_Controller {
+class IWmyrole_Controller_Admin extends Zikula_AbstractController {
     /**
      * Main admin function. Create admin interface
      * @author: 	Josep Ferràndiz (jferran6@xtec.cat)
