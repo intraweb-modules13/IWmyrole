@@ -10,7 +10,7 @@ class IWmyrole_Api_Admin extends Zikula_AbstractApi {
     public function delUserGroups() {
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         $pntables = DBUtil::getTables();
@@ -35,7 +35,7 @@ class IWmyrole_Api_Admin extends Zikula_AbstractApi {
         $defaultRoles = FormUtil::getPassedValue('defaultRoles', isset($args['defaultRoles']) ? $args['defaultRoles'] : null, 'POST');
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN) && $defaultRoles != 1) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         if ($defaultRoles == 1) {
             $roles = array();
@@ -89,7 +89,7 @@ class IWmyrole_Api_Admin extends Zikula_AbstractApi {
     public function correctGroupPermissions($args) {
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
         // Get the min sequence value
         $pos = DBUtil::selectFieldMax('group_perms', 'sequence', 'MIN') + 1;
@@ -124,7 +124,7 @@ class IWmyrole_Api_Admin extends Zikula_AbstractApi {
 
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         $pntables = DBUtil::getTables();

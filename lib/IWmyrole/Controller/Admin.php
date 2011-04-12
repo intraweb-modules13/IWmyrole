@@ -18,7 +18,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         $groupsNotChangeable = ModUtil::getVar('IWmyrole', 'groupsNotChangeable');
@@ -64,7 +64,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         $this->checkCsrfToken();
@@ -106,7 +106,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         //Check if the group that can change roles have admin permisions. If not the block is not showed
@@ -207,7 +207,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
     public function resetRoles($args) {
         // Security check
         if (!SecurityUtil::checkPermission('IWmyrole::', "::", ACCESS_ADMIN)) {
-            return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
+            throw new Zikula_Exception_Forbidden();
         }
 
         //get the headlines saved in the user vars. It is renovate every 10 minutes
