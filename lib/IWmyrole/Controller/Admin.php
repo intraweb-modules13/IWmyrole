@@ -1,5 +1,11 @@
 <?php
+
 class IWmyrole_Controller_Admin extends Zikula_AbstractController {
+
+    public function postInitialize() {
+        $this->view->setCaching(false);
+    }
+
     /**
      * Main admin function. Create admin interface
      * @author: 	Josep Ferràndiz (jferran6@xtec.cat)
@@ -19,31 +25,29 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
-                                 array('sv' => $sv,
-                                       'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
+                        array('sv' => $sv,
+                            'less' => ModUtil::getVar('IWmyrole', 'rolegroup')));
 
         foreach ($groups as $group) {
             $checked = false;
 
-            if (strpos($groupsNotChangeable, '$' . $group['id'] . '$') != false) $checked = true;
+            if (strpos($groupsNotChangeable, '$' . $group['id'] . '$') != false)
+                $checked = true;
 
             $groupsArray[] = array('id' => $group['id'],
-                                   'name' => $group['name'],
-                                   'checked' => $checked);
+                'name' => $group['name'],
+                'checked' => $checked);
         }
-
-        $view = Zikula_View::getInstance('IWmyrole', false);
 
         // Gets the groups
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $groups = ModUtil::func('IWmain', 'user', 'getAllGroups',
-                                 array('sv' => $sv));
+                        array('sv' => $sv));
 
-        $view->assign('roleGroup', ModUtil::getVar('IWmyrole', 'rolegroup'));
-        $view->assign('groups', $groups);
-        $view->assign('groupsArray', $groupsArray);
-
-        return $view->fetch('IWmyrole_admin_main.htm');
+        return $this->view->assign('roleGroup', ModUtil::getVar('IWmyrole', 'rolegroup'))
+                ->assign('groups', $groups)
+                ->assign('groupsArray', $groupsArray)
+                ->fetch('IWmyrole_admin_main.htm');
     }
 
     /**
@@ -76,7 +80,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
         if ($gid) {
             // Modify the permissions in group_perms
             $changePerms = ModUtil::apiFunc('IWmyrole', 'admin', 'changePermissions',
-                                             array('gid' => $gid));
+                            array('gid' => $gid));
             if ($changePerms) {
                 //Update module var with new value
                 ModUtil::setVar('IWmyrole', 'rolegroup', $gid);
@@ -114,13 +118,13 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
         if (!$correctGroupPermissions) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             ModUtil::func('IWmain', 'user', 'userSetVar',
-                           array('uid' => UserUtil::getVar('uid'),
-                                 'name' => 'invalidChange',
-                                 'module' => 'IWmyrole',
-                                 'lifetime' => 10,
-                                 'nult' => true,
-                                 'value' => 1,
-                                 'sv' => $sv));
+                            array('uid' => UserUtil::getVar('uid'),
+                                'name' => 'invalidChange',
+                                'module' => 'IWmyrole',
+                                'lifetime' => 10,
+                                'nult' => true,
+                                'value' => 1,
+                                'sv' => $sv));
             return System::redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -129,17 +133,17 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
         //get the headlines saved in the user vars. It is renovate every 10 minutes
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists',
-                                    array('name' => 'defaultRoles',
-                                         'module' => 'IWmyrole',
-                                         'uid' => $uid,
-                                         'sv' => $sv));
+                        array('name' => 'defaultRoles',
+                            'module' => 'IWmyrole',
+                            'uid' => $uid,
+                            'sv' => $sv));
 
         if (!$exists) {
             //get user groups
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             $userGroups = ModUtil::func('IWmain', 'user', 'getAllUserGroups',
-                                         array('sv' => $sv,
-                                               'uid' => $uid));
+                            array('sv' => $sv,
+                                'uid' => $uid));
             $i = 0;
             foreach ($userGroups as $group) {
                 $groups .= $group['id'] . '$$';
@@ -149,11 +153,11 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
             //set default roles
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             ModUtil::func('IWmain', 'user', 'userSetVar',
-                           array('uid' => $uid,
-                                 'name' => 'defaultRoles',
-                                 'module' => 'IWmyrole',
-                                 'sv' => $sv,
-                                 'value' => $groups));
+                            array('uid' => $uid,
+                                'name' => 'defaultRoles',
+                                'module' => 'IWmyrole',
+                                'sv' => $sv,
+                                'value' => $groups));
         }
 
         if ($setDefault == 1) {
@@ -165,11 +169,11 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
             //set default roles
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             ModUtil::func('IWmain', 'user', 'userSetVar',
-                           array('uid' => $uid,
-                                 'name' => 'defaultRoles',
-                                 'module' => 'IWmyrole',
-                                 'sv' => $sv,
-                                 'value' => $groups));
+                            array('uid' => $uid,
+                                'name' => 'defaultRoles',
+                                'module' => 'IWmyrole',
+                                'sv' => $sv,
+                                'value' => $groups));
         }
 
         //Check if the group that can change roles have admin permisions. If not the block is not showed
@@ -184,7 +188,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         if ($delGroups) {
             $addToGroup = ModUtil::apiFunc('IWmyrole', 'admin', 'addUserToGroup',
-                                            array('roles' => $roles));
+                            array('roles' => $roles));
         }
 
         if (!$delGroups || !$addToGroup) {
@@ -192,7 +196,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
         }
 
         ModUtil::func('IWmain', 'user', 'regenBlockNews',
-                       array('sv' => $sv));
+                        array('sv' => $sv));
         return true;
     }
 
@@ -212,20 +216,20 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
         //get the headlines saved in the user vars. It is renovate every 10 minutes
         $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
         $exists = ModUtil::apiFunc('IWmain', 'user', 'userVarExists',
-                                    array('name' => 'defaultRoles',
-                                          'module' => 'IWmyrole',
-                                          'uid' => UserUtil::getVar('uid'),
-                                          'sv' => $sv));
+                        array('name' => 'defaultRoles',
+                            'module' => 'IWmyrole',
+                            'uid' => UserUtil::getVar('uid'),
+                            'sv' => $sv));
         if (!$exists) {
             $sv = ModUtil::func('IWmain', 'user', 'genSecurityValue');
             ModUtil::func('IWmain', 'user', 'userSetVar',
-                           array('uid' => UserUtil::getVar('uid'),
-                                 'name' => 'invalidChange',
-                                 'module' => 'IWmyrole',
-                                 'lifetime' => 10,
-                                 'nult' => true,
-                                 'value' => 1,
-                                 'sv' => $sv));
+                            array('uid' => UserUtil::getVar('uid'),
+                                'name' => 'invalidChange',
+                                'module' => 'IWmyrole',
+                                'lifetime' => 10,
+                                'nult' => true,
+                                'value' => 1,
+                                'sv' => $sv));
             return System::redirect($_SERVER['HTTP_REFERER']);
         }
 
@@ -234,10 +238,11 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
 
         // Esborrem la pertinenÃ§a a tots els grups excepte el de canvia de rol
         ModUtil::apiFunc('IWmyrole', 'admin', 'addUserToGroup',
-                          array('defaultRoles' => 1));
+                        array('defaultRoles' => 1));
 
         ModUtil::func('IWmain', 'user', 'regenBlockNews',
-                       array('sv' => $sv));
+                        array('sv' => $sv));
         return true;
     }
+
 }
