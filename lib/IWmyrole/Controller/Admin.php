@@ -67,10 +67,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
             return LogUtil::registerError($this->__('Sorry! No authorization to access this module.'), 403);
         }
 
-        // Confirm authorisation code
-        if (!SecurityUtil::confirmAuthKey()) {
-            return LogUtil::registerAuthidError(ModUtil::url('IWmyrole', 'admin', 'main'));
-        }
+        $this->checkCsrfToken();
 
         $groupsString = '$';
         foreach ($groups as $group) {

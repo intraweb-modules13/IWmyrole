@@ -8,7 +8,7 @@
     <h2>{gt text="Group selection"}</h2>
     <div style="height:15px;">&nbsp;</div>
     <form id="changeGroup" class="z-form" enctype="application/x-www-form-urlencoded" method="post" action="{modurl modname="IWmyrole" type="admin" func="changeGroup"}">
-        <input type="hidden" name="authid" value="{insert name="generateauthkey" module="IWmyrole"}" />
+          <input type="hidden" name="csrftoken" value="{insert name='csrftoken'}" />
         <div class="z-formrow">
             <label for="gid">{gt text="Choose the change role group"}:</label>
             <select name="gid">
