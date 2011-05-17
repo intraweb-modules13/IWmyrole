@@ -87,7 +87,7 @@ class IWmyrole_Controller_Admin extends Zikula_AbstractController {
             }
         }
 
-        ModUtil::setVar('IWmyrole', 'groupsNotChangeable', $groupsString);
+        $this->setVar('groupsNotChangeable', $groupsString);
 
         return System::redirect(ModUtil::url('IWmyrole', 'admin', 'main'));
     }
