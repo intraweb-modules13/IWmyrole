@@ -11,6 +11,7 @@
  * @subpackage Noteboard
  */
 class IWmyrole_Installer extends Zikula_AbstractInstaller {
+
     /**
      * Initialise the IWmyrole module creating module vars
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
@@ -28,8 +29,7 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
 
         // Check if the version needed is correct
         $versionNeeded = '3.0.0';
-        if (!ModUtil::func('IWmain', 'admin', 'checkVersion',
-                            array('version' => $versionNeeded))) {
+        if (!ModUtil::func('IWmain', 'admin', 'checkVersion', array('version' => $versionNeeded))) {
             return false;
         }
 
@@ -37,8 +37,7 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
         $name = "changingRole";
 
         // The API function is called.
-        $check = ModUtil::apiFunc('Groups', 'admin', 'getgidbyname',
-                                   array('name' => $name));
+        $check = ModUtil::apiFunc('Groups', 'admin', 'getgidbyname', array('name' => $name));
 
         if ($check != false) {
             // Group already exists
@@ -46,12 +45,11 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
             $gid = $check;
         } else {
             // Falta mirar si existeix
-            $gid = ModUtil::apiFunc('Groups', 'admin', 'create',
-                                     array('name' => $name,
-                                           'gtype' => 0,
-                                           'state' => 0,
-                                           'nbumax' => 0,
-                                           'description' => $this->__('Initial group of users that can change the role')));
+            $gid = ModUtil::apiFunc('Groups', 'admin', 'create', array('name' => $name,
+                        'gtype' => 0,
+                        'state' => 0,
+                        'nbumax' => 0,
+                        'description' => $this->__('Initial group of users that can change the role')));
             // Success
         }
 
@@ -62,13 +60,12 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
             $pos = DBUtil::selectFieldMax('group_perms', 'sequence', 'MIN');
             // SET MODULE AND BLOCK PERMISSIONS
             // insert permission myrole:: :: administration in second place
-            ModUtil::apiFunc('permissions', 'admin', 'create',
-                              array('realm' => 0,
-                                    'id' => $gid,
-                                    'component' => 'IWmyrole::',
-                                    'instance' => '::',
-                                    'level' => '800',
-                                    'insseq' => $pos + 1));
+            ModUtil::apiFunc('permissions', 'admin', 'create', array('realm' => 0,
+                'id' => $gid,
+                'component' => 'IWmyrole::',
+                'instance' => '::',
+                'level' => '800',
+                'insseq' => $pos + 1));
         }
 
         $this->setVar('groupsNotChangeable', '');
@@ -93,17 +90,44 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
         $result = DBUtil::DeleteWhere('group_perms', $where);
 
         $this->delVar('rolegroup')
-             ->delVar('groupsNotChangeable');
+                ->delVar('groupsNotChangeable');
 
         return true;
     }
 
     /**
-     * Update the iwmyrole module
+     * Update the IWmyrole module
      * @author Albert Pérez Monfort (aperezm@xtec.cat)
+     * @author Jaume Fernàndez Valiente (jfern343@xtec.cat)
      * @return bool true if successful, false otherwise
      */
     public function upgrade($oldversion) {
+        //Suposo que els noms de les columnes de la taula z_blocks ja han estat actualitzats
+        $prefix = $GLOBALS['ZConfig']['System']['prefix'];
+
+
+        // Update z_blocs table
+        //Suposo que els noms de les columnes de la taula z_blocks ja han estat actualitzats
+
+        $c = "UPDATE {$prefix}_blocks SET z_bkey = 'Myrole' WHERE z_bkey = 'myrole'";
+        if (!DBUtil::executeSQL($c)) {
+            return false;
+        }
+
+
+        //Update module_vars table
+
+        //Update the name (keeps old var value)
+        $c = "UPDATE {$prefix}_module_vars SET z_modname = 'IWmyrole' WHERE z_bkey = 'iw_myrole'";
+        if (!DBUtil::executeSQL($c)) {
+            return false;
+        }
+
+        if (!ModUtil::hasVar('IWmyrole', 'groupsNotChangeable')) {
+            $this->setVar('groupsNotChangeable', '');
+        }
+
         return true;
     }
+
 }
