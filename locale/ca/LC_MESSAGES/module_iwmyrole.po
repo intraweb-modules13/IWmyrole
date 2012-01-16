@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Zikula 1.2.x\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-01-27 09:38+0100\n"
-"PO-Revision-Date: 2011-12-23 13:51+0100\n"
+"PO-Revision-Date: 2012-01-16 15:57+0100\n"
 "Last-Translator: intraweb <intraweb@xtec.cat>\n"
 "Language-Team: Intraweb <intraweb@xtec.cat>\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr "Selecció de grup"
 
 #: pntemplates/IWmyrole_admin_main.htm:13
 msgid "Choose the change role group"
-msgstr "Tria el grup per a canvis de rol"
+msgstr "Trieu el grup per a canvis de rol"
 
 #: pntemplates/IWmyrole_admin_main.htm:23
 msgid "Groups not listed in the chooseable groups list"
@@ -104,10 +104,6 @@ msgstr "Modifica"
 #: pntemplates/IWmyrole_admin_main.htm:35
 msgid "Cancel"
 msgstr "Cancel·la"
-
-#: pntemplates/IWmyrole_admin_main.htm:39
-msgid "About this module "
-msgstr "Pel que fa a aquest mòdul"
 
 #: pntemplates/IWmyrole_block_change.htm:4
 msgid "Choose the groups..."
