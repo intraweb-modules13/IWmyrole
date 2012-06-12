@@ -3,10 +3,10 @@
            <div style="margin-bottom:15px;">
             <strong>{gt text="Choose the groups..."}</strong><br><br>
             {foreach item=group from=$groups name=rols}
-                <div>
-                    <input type="checkbox" name="roles[]" {if isset($roleGroups[$group.id])}checked{/if} value="{$group.id}" />
-                    {$group.name}
-                </div>
+            <div>
+                <input type="checkbox" name="roles[]" {if isset($roleGroups[$group.id])}checked{/if} value="{$group.id}" />
+                       {$group.name}
+            </div>
             {/foreach}
             <div>
                 &nbsp;
@@ -27,13 +27,28 @@
         </div>
         {/if}
         <div style="float: left;">
-            {gt text="Reset"}<a href="{modurl modname="IWmyrole" type=admin func="resetRoles"}"> {img modname='core' src='quick_restart.png' set='icons/small'   __alt="Reset" __title="Reset" style="cursor:pointer;"}</a>
+            <a href="{modurl modname='IWmyrole' type='admin' func='resetRoles'}">
+                {gt text="Reset"}
+            </a>
+            <a href="{modurl modname='IWmyrole' type='admin' func='resetRoles'}">
+                {img modname='core' src='quick_restart.png' set='icons/extrasmall' __alt="Reset" __title="Reset" style="cursor:pointer;"}
+            </a>
         </div>
         <div style="float: right;">
-            {gt text="Apply new roles"} {img modname='core' src='agt_update_recommended.png' set='icons/small'   __alt="Apply new roles" __title="Apply new roles" onClick = "javascript:document.change.submit()" style="cursor:pointer;"}
+            <a href="javascript:document.change.submit()">
+                {gt text="Apply new roles"}
+            </a>
+            <a href="javascript:document.change.submit()">
+                {img modname='core' src='agt_update_recommended.png' set='icons/extrasmall' __alt="Apply new roles" __title="Apply new roles" style="cursor:pointer;"}
+            </a>
         </div>
         <div style="clear: both;">
-            {gt text="Administration"} <a href="{modurl modname=IWmyrole type=admin func=main}"> {img modname='core' src='configure.png' set='icons/extrasmall'   __alt="Administration" __title="Administration"}</a>
+            <a href="{modurl modname=IWmyrole type=admin func=main}"> 
+                {gt text="Administration"}
+            </a>
+            <a href="{modurl modname=IWmyrole type=admin func=main}">
+                {img modname='core' src='configure.png' set='icons/extrasmall' __alt="Administration" __title="Administration"}
+            </a>
         </div>
     </form>
 </div>
