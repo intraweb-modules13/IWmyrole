@@ -102,27 +102,6 @@ class IWmyrole_Installer extends Zikula_AbstractInstaller {
      * @return bool true if successful, false otherwise
      */
     public function upgrade($oldversion) {
-        //Suposo que els noms de les columnes de la taula z_blocks ja han estat actualitzats
-        $prefix = $GLOBALS['ZConfig']['System']['prefix'];
-
-
-        // Update z_blocs table
-        //Suposo que els noms de les columnes de la taula z_blocks ja han estat actualitzats
-
-        $c = "UPDATE {$prefix}_blocks SET z_bkey = 'Myrole' WHERE z_bkey = 'myrole'";
-        if (!DBUtil::executeSQL($c)) {
-            return false;
-        }
-
-
-        //Update module_vars table
-
-        //Update the name (keeps old var value)
-        $c = "UPDATE {$prefix}_module_vars SET z_modname = 'IWmyrole' WHERE z_bkey = 'iw_myrole'";
-        if (!DBUtil::executeSQL($c)) {
-            return false;
-        }
-
         if (!ModUtil::hasVar('IWmyrole', 'groupsNotChangeable')) {
             $this->setVar('groupsNotChangeable', '');
         }
